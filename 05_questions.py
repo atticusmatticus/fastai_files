@@ -99,6 +99,7 @@ x = torch.arange(start=-2, end=2, step=0.01)
 y = torch.log(x)
 
 plt.plot(x, y, linewidth=2)
+plt.xlim(-1,2)
 
 plt.grid(color='#333', linestyle='-.')
 plt.xlabel(r'$x$', fontsize=16)
