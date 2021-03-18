@@ -93,7 +93,8 @@ print('Softmax:', softOut, 'Sum:', softOut.sum())
 plt.rcParams.update({
     'text.usetex': True,
     'text.latex.preamble': r'\usepackage{bm}',
-    'font.family': "Palatino"
+    "font.family": "serif",
+    "font.serif": "Palatino",
 })
 x = torch.arange(start=-2, end=2, step=0.01)
 y = torch.log(x)
