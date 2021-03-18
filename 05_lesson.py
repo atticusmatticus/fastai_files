@@ -34,8 +34,8 @@ pets = DataBlock(blocks=(ImageBlock, CategoryBlock),
                  item_tfms=Resize(460), # resize each item to 460 x 460 by grabbing a random 460x460 square of the source image
                  batch_tfms=aug_transforms(size=224, min_scale=0.75)) # grab a random (possibly warped and rotated) 224x224 crop of the 460x460 image.
 # Presizing is done like this because it is a slow process. Because the first step (item_tfms) always creates something that is the same size, the second step can be done on the GPU which is preferrable because the augmentations are slow.
-dls = pets.dataloaders(path/'images')
 pets.summary(path/'images')
+dls = pets.dataloaders(path/'images')
 ####
 
 ####
