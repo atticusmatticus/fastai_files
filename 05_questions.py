@@ -107,6 +107,28 @@ plt.xlabel(r'$x$', fontsize=16)
 plt.ylabel(r'$\ln(x)$', fontsize=16)
 plt.savefig('log.pdf')
 ############
+
+# Find methods of fine_tune
+############
+path = untar_data(URLs.PETS, dest='/media/xar/barracuda1/fast.ai/data')
+path.ls()
+pets = DataBlock(blocks=(ImageBlock, CategoryBlock),
+                 get_items=get_image_files,
+                 splitter=RandomSplitter(seed=42),
+                 get_y=using_attr(RegexLabeller(r'(.+)_\d+\.jpg$'), 'name'),
+                 item_tfms=Resize(460),
+                 batch_tfms=aug_transforms(size=224, min_scale=0.75))
+dls = pets.dataloaders(path/'images')
+############
+
+############
+learn = cnn_learner(dls=dls, arch=resnet34, metrics=error_rate)
+learn.fine_tune(1)
+############
+
+############
+############
+############
 ############
 ############
 ############
