@@ -44,10 +44,10 @@ class T(Module): # module subclass
 L(T().parameters()) # now we get our vector returned.
 ###############################################################################
 
-# 
+# Create our own Embedding subroutine
 ###############################################################################
 def create_params(size):
-    return nn.Parameter(torch.zeros(*size).normal_(0, 0.01))
+    return nn.Parameter(torch.zeros(*size).normal_(0, 0.01)) # `*size` turns the variable size into a tuple
 ###############################################################################
 class DotProductBias(Module):
     def __init__(self, nUsers, nMovies, nFactors, yRange=(0,5.5)):
@@ -57,7 +57,7 @@ class DotProductBias(Module):
         self.movieBias = create_params([nMovies])
         self.yRange = yRange
 
-    def forward(self, x):
+    def forward(self, x): # x is the movie ids and the user ids as two columns.
         users = self.userFactors[x[:,0]]
         movies = self.movieFactors[x[:,1]]
         res = (users*movies).sum(dim=1)
